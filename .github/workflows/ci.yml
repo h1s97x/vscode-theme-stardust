@@ -9,10 +9,99 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       
-      - name: Check files exist
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Validate theme JSON files
         run: |
-          ls -la
-          ls -la themes/
+          echo "Validating theme files..."
+          node -e "
+            const fs = require('fs');
+            const themes = [
+              './themes/stardust-color-theme.json',
+              './themes/stardust-light-color-theme.json'
+            ];
+            
+            themes.forEach(file => {
+              try {
+                const content = fs.readFileSync(file, 'utf8');
+                const theme = JSON.parse(content);
+                
+                // Check required fields
+                if (!theme.name) throw new Error('Missing name');
+                if (!theme.type) throw new Error('Missing type');
+                if (!theme.colors) throw new Error('Missing colors');
+                if (!theme.tokenColors) throw new Error('Missing tokenColors');
+                
+                console.log('✓', file, '- Valid');
+              } catch (err) {
+                console.error('✗', file, '-', err.message);
+                process.exit(1);
+              }
+            });
+          "
+      
+      - name: Validate package.json
+        run: |
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+            
+            // Check required fields
+            if (!pkg.name) throw new Error('Missing name');
+            if (!pkg.displayName) throw new Error('Missing displayName');
+            if (!pkg.version) throw new Error('Missing version');
+            if (!pkg.engines?.vscode) throw new Error('Missing vscode engine');
+            if (!pkg.contributes?.themes) throw new Error('Missing themes contribution');
+            
+            console.log('✓ package.json - Valid');
+            console.log('  Name:', pkg.displayName);
+            console.log('  Version:', pkg.version);
+          "
+      
+      - name: Check required files exist
+        run: |
+          echo "Checking file structure..."
+          test -f package.json || (echo "Missing package.json" && exit 1)
+          test -f themes/stardust-color-theme.json || (echo "Missing dark theme" && exit 1)
+          test -f themes/stardust-light-color-theme.json || (echo "Missing light theme" && exit 1)
+          test -f LICENSE || (echo "Missing LICENSE" && exit 1)
+          test -f README.md || (echo "Missing README" && exit 1)
+          test -f CHANGELOG.md || (echo "Missing CHANGELOG" && exit 1)
+          echo "✓ All required files present"
+      
+      - name: Check theme colors
+        run: |
+          node -e "
+            const fs = require('fs');
+            const theme = JSON.parse(fs.readFileSync('./themes/stardust-color-theme.json', 'utf8'));
+            
+            const requiredColors = [
+              'editor.background',
+              'editor.foreground',
+              'sideBar.background',
+              'activityBar.background'
+            ];
+            
+            requiredColors.forEach(color => {
+              if (!theme.colors[color]) {
+                console.error('Missing color:', color);
+                process.exit(1);
+              }
+            });
+            
+            console.log('✓ Required colors present');
+          "
+      
+      - name: Summary
+        run: |
+          echo "========================================"
+          echo "  All validation passed!"
+          echo "========================================"
