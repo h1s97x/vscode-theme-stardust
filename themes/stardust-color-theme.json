@@ -2,57 +2,38 @@
   "name": "Stardust",
   "type": "dark",
   "colors": {
-    // Editor
     "editor.background": "#0d1117",
     "editor.foreground": "#c9d1d9",
     "editor.lineHighlightBackground": "#161b22",
     "editor.selectionBackground": "#264f78",
     "editor.inactiveSelectionBackground": "#264f7855",
-    
-    // Sidebar
     "sideBar.background": "#010409",
     "sideBar.foreground": "#c9d1d9",
     "sideBar.border": "#30363d",
-    
-    // Activity Bar
     "activityBar.background": "#010409",
     "activityBar.foreground": "#c9d1d9",
     "activityBar.inactiveForeground": "#8b949e",
     "activityBar.border": "#30363d",
-    
-    // Status Bar
     "statusBar.background": "#010409",
     "statusBar.foreground": "#c9d1d9",
     "statusBar.border": "#30363d",
-    
-    // Title Bar
     "titleBar.activeBackground": "#010409",
     "titleBar.activeForeground": "#c9d1d9",
     "titleBar.border": "#30363d",
-    
-    // Tabs
     "tab.activeBackground": "#0d1117",
     "tab.activeForeground": "#c9d1d9",
     "tab.inactiveBackground": "#010409",
     "tab.inactiveForeground": "#8b949e",
     "tab.border": "#30363d",
-    
-    // Terminal
     "terminal.background": "#0d1117",
     "terminal.foreground": "#c9d1d9",
     "terminalCursor.background": "#0d1117",
     "terminalCursor.foreground": "#c9d1d9",
-    
-    // Git
     "gitDecoration.modifiedResourceForeground": "#d29922",
     "gitDecoration.deletedResourceForeground": "#f85149",
     "gitDecoration.untrackedResourceForeground": "#3fb950",
-    
-    // Lists
     "list.activeSelectionBackground": "#1f6feb33",
     "list.hoverBackground": "#161b22",
-    
-    // Buttons
     "button.background": "#238636",
     "button.foreground": "#ffffff",
     "button.hoverBackground": "#2ea043"
