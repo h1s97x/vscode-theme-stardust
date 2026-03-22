@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2024-03-22
+
+### Added
+- Stardust Light theme variant
+- Light color palette optimized for daytime coding
+- Updated documentation with both theme variants
+
 ## [0.1.0] - 2024-03-22
 
 ### Added
@@ -16,4 +23,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - VS Code integration
 - CI/CD workflow for validation
 
+[0.2.0]: https://github.com/h1s97x/stardust-theme/releases/tag/v0.2.0
 [0.1.0]: https://github.com/h1s97x/stardust-theme/releases/tag/v0.1.0
