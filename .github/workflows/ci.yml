@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Validate JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('./themes/stardust-color-theme.json'))"
+          echo "Theme JSON is valid!"
+      
+      - name: Check package.json
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('./package.json'))"
+          echo "Package JSON is valid!"
